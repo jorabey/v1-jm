@@ -65,8 +65,8 @@ const Login = () => {
 
     setLoading(true);
 
-    const pureLogin = cleanUsername.includes('@') ? cleanUsername.split('@')[0] : cleanUsername;
-    const generatedEmail = `${pureLogin}@jora.net`;
+    // Agar matnda '@' bo'lsa kiritilgan email o'zi, aks holda '@jora.net' qo'shiladi
+    const generatedEmail = cleanUsername.includes('@') ? cleanUsername : `${cleanUsername}@jora.net`;
 
     try {
       const { data: profile } = await supabase
@@ -148,7 +148,7 @@ const Login = () => {
                       type="text" 
                       autoCorrect="off"
                       autoCapitalize="none"
-                      placeholder="Foydalanuvchi nomi" 
+                      placeholder="Foydalanuvchi nomi yoki email" 
                       className="w-full bg-transparent p-4 pr-24 text-[15px] font-semibold outline-none text-black dark:text-white focus:bg-black/[0.01] dark:focus:bg-white/[0.02] placeholder-neutral-400 dark:placeholder-neutral-500 transition-all"
                       value={username}
                       onChange={(e) => setUsername(e.target.value.replace(/\s/g, ''))}
